@@ -17,14 +17,20 @@ app.use('/vendor', express.static(path.join(__dirname, 'node_modules')));
 app.use('/source', express.static(path.join(__dirname, 'source')));
 
 app.get('/users', (req, res, next) => {
-	// console.log('get users');
 	User.findAllData()
 	.then((data) => {
-		// console.log('data = ', data)
 		res.send(data);		
 	})
+	.catch(next);
+});
 
-})
+app.delete('/users/:id', (req, res, next) => {
+	User.destroy({where: {id: req.params.id}})
+	.then(() => {
+		res.sendStatus(202);
+	})
+	.catch(next);
+});
 
 app.use('/', (req, res, next) => {
 	res.render('index');
