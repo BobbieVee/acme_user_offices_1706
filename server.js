@@ -32,6 +32,14 @@ app.delete('/users/:id', (req, res, next) => {
 	.catch(next);
 });
 
+app.delete('/offices/:id', (req, res, next) => {
+	Office.destroy({where: {id: req.params.id}})
+	.then(() => {
+		res.sendStatus(202);
+	})
+	.catch(next);
+});
+
 app.use('/', (req, res, next) => {
 	res.render('index');
 });

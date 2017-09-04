@@ -10,7 +10,4 @@ function renderLists(){
 			createOfficeHtml(users, offices)
 		]) 
 	})
-	.then(([userLis, officeLis])=> {
-		createUserList(userLis);
-	});	
 }

@@ -20,28 +20,31 @@ function createUserHtml(users, offices){
 	}, optionNone); 
 });
 
-	// Create User HTML
-	return users.reduce((memo, user) => {
+	// Create single User HTML
+	let lis =  users.reduce((memo, user) => {
 		return memo += `
 			<li class='list-group-item'>${user.name}
 				<select class='select-group'>
 					${user.offices}
 				</select>
 				<div class='removeUser'>
-					<button class='btn btn-warning btn-sm' id=${user.id} style='margin-top: 10px'>Remove</button>
+					<button class='btn btn-danger btn-sm' id=${user.id} style='margin-top: 10px'>Remove</button>
 				</div>
 
 			</li>
 		`
 	}, '');
-}
 
-function createUserList(lis) {
+	//Create user list
 	const $userList = $('.userList');
 	$userList.html(
 	`<ul class='list-group'> 
 			${lis}
 		</ul>`);
+	removeUser();	
+}
+
+function removeUser(){
  	var $removeUser = $('.removeUser');
 	$removeUser.on('click', 'button', function(){
 		let userId = $(this).attr('id');
