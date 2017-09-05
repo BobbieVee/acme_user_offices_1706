@@ -44,13 +44,13 @@ const seed = () => {
 };
 
 User.findAllData = () => {
-	return Promise.all([
-		User.findAll({include: [{model: Office}]}),
-		Office.findAll()
-	])
-	.then(([users, offices]) => {
-		return [users, offices];
-	})
+	return User.findAll({include: [{model: Office}]})
+	.then(users => users);
+};
+
+Office.findAllData = () => {
+	return Office.findAll({include: [{model: User}]})
+	.then(offices => offices);
 };
 
 module.exports = {

@@ -42,6 +42,7 @@ function createUserHtml(users, offices){
 			${lis}
 		</ul>`);
 	removeUser();	
+	addUser();
 }
 
 function removeUser(){
@@ -55,3 +56,17 @@ function removeUser(){
 		})
 	});		
 }
+
+function addUser(){
+ 	var addUser = $('#addUser');
+	addUser.submit( function(event){
+		var name = addUser.find('[name="name"]').val()
+		$.ajax({
+			url: '/users',
+			type: 'POST',
+			data: {"name": name},
+			success: renderLists 
+		})
+	});		
+}
+

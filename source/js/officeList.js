@@ -6,6 +6,7 @@ function createOfficeHtml(users, offices){
 			<h4> ${office.name} </h4>
 			<h5> <i> Lat: </i>  ${office.lat} </h5>
 			<h5> <i> Lng: </i>  ${office.lng} </h5>
+			<hr5 style='color: blue'> <i> Users: ${office.users.length} <i></h5>
 			<div class='removeOffice'>
 			<button class='btn btn-danger btn-xs' id='${office.id}'>delete</button>
 		</li>`
@@ -18,6 +19,7 @@ function createOfficeHtml(users, offices){
 			${lis}
 		</ul>`);
 	removeOffice();	
+	addOffice();
 }
 
 function removeOffice(){
@@ -30,5 +32,17 @@ function removeOffice(){
 			success: renderLists
 		})
 	})
+}
 
+function addOffice(){
+ 	var addOffice = $('#addOffice');
+	addOffice.submit( function(event){
+		var name = addOffice.find('[name="name"]').val()
+		$.ajax({
+			url: '/offices',
+			type: 'POST',
+			data: {"name": name},
+			success: renderLists 
+		});
+	});		
 }
